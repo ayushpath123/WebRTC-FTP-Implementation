@@ -12,9 +12,8 @@ app.get('/health', (req, res) => res.json({ ok: true }));
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server, path: '/ws' });
 
-/**
- * rooms: Map<roomId, Set<WebSocket>>
- */
+// We keep track of all the rooms and which WebSocket connections are in each room
+// Think of it like chat rooms - each room has a list of people connected to it
 const rooms = new Map();
 
 function getOrCreateRoom(roomId) {
@@ -48,7 +47,8 @@ wss.on('connection', (ws) => {
 			return;
 		}
 
-		// Relay signaling messages to others in the room
+		// When someone sends an offer, answer, or ICE candidate, we pass it along to everyone else in the same room
+		// This is how WebRTC peers find each other and establish a direct connection
 		if (['offer', 'answer', 'candidate'].includes(type)) {
 			const { roomId } = msg;
 			if (!roomId) return;

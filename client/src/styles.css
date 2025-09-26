@@ -1,20 +1,27 @@
+/* Our color palette - dark theme that's easy on the eyes */
 :root {
-	--bg: #0b0f14;
-	--panel: #121821;
-	--panel-2: #192231;
-	--text: #e7eef7;
-	--muted: #a8b3c7;
-	--primary: #4da3ff;
-	--primary-2: #2a7ae6;
-	--success: #49d17c;
-	--warn: #ffcc66;
-	--danger: #ff6b6b;
-	--border: #233043;
+	--bg: #0b0f14;        /* Deep dark background */
+	--panel: #121821;     /* Slightly lighter for panels */
+	--panel-2: #192231;   /* Even lighter for gradients */
+	--text: #e7eef7;      /* Soft white text */
+	--muted: #a8b3c7;     /* Dimmed text for less important stuff */
+	--primary: #4da3ff;   /* Nice blue for buttons and links */
+	--primary-2: #2a7ae6; /* Darker blue for hover effects */
+	--success: #49d17c;   /* Green for good news */
+	--warn: #ffcc66;      /* Yellow for warnings */
+	--danger: #ff6b6b;    /* Red for errors */
+	--border: #233043;    /* Subtle borders */
 }
 
+/* Reset some defaults and set up our base styles */
 * { box-sizing: border-box; }
 html, body, #root { height: 100%; }
-body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+body { 
+	margin: 0; 
+	background: var(--bg); 
+	color: var(--text); 
+	font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; 
+}
 
 .app {
 	max-width: 1100px;
@@ -27,6 +34,7 @@ body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter,
 .subtitle { color: var(--muted); font-size: 13px; }
 
 .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+/* Nice looking panels with subtle gradients and shadows */
 .panel {
 	background: linear-gradient(180deg, var(--panel), var(--panel-2));
 	border: 1px solid var(--border);
@@ -52,6 +60,7 @@ body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter,
 .card-title { font-weight: 700; margin-bottom: 8px; }
 .code { background: #0c121a; border: 1px solid var(--border); border-radius: 10px; padding: 12px; overflow: auto; }
 
+/* Progress bars for file transfers - like a loading bar */
 .progress { height: 8px; background: #0c121a; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
 .progress > span { display: block; height: 100%; background: linear-gradient(90deg, var(--primary), #7acbff); width: 0; }
 

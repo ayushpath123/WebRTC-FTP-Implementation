@@ -1,13 +1,15 @@
-# WebRTC Unreliable DataChannel Reliability Demo
+# WebRTC Reliability Demo 🚀
 
-A full-stack demo showcasing a custom reliability mechanism built on top of an unreliable and unordered WebRTC DataChannel. Includes a simple signaling server (Express + WebSocket) and a React UI that can transfer files/messages reliably with live stats.
+Ever wondered how to make unreliable things reliable? This demo shows you exactly that!
 
-## Features
-- Single unreliable/unordered DataChannel (`ordered: false`, `maxRetransmits: 0`)
-- Custom reliability (stop-and-wait ARQ) with sequencing, ACKs, retransmits, and timeouts
-- File transfer with chunking and reassembly
-- Live stats: packets sent/received, ACKs, retransmits, RTT estimate, bytes transferred
-- Simple RTT history sparkline
+We take WebRTC's intentionally unreliable DataChannel and build our own "guaranteed delivery " system on top of it. It's like building a reliable postal service using carrier pigeons - challenging but totally doable!
+
+## What's Cool About This? ✨
+- **Unreliable by Design**: We intentionally use the least reliable DataChannel settings possible
+- **Custom Reliability**: Built our own "registered mail" system that waits for confirmations
+- **File Transfer**: Send any file by breaking it into pieces and reassembling it perfectly
+- **Live Dashboard**: Watch packets fly back and forth with real-time stats
+- **Pretty Charts**: See your connection quality with a live response time graph
 
 ## Project Structure
 ```
@@ -58,25 +60,33 @@ Open two different browser windows/tabs to the printed client URL (default `http
 - On the other peer click "Answer"
 - When connected, try "Send Message" and try sending a file.
 
-## How It Works
-- Signaling is done over WebSocket; peers join a room and exchange SDP offers/answers and ICE candidates.
-- DataChannel is configured as unreliable and unordered.
-- Reliability is implemented with a stop-and-wait ARQ:
-  - Sender sends one chunk with a sequence number and timestamp, waits for ACK.
-  - If timeout elapses before ACK, retransmit.
-  - Receiver ACKs the last seen sequence number and buffers file chunks.
-- File transfer protocol:
-  - Send `file-meta` (name/size/type/totalChunks)
-  - Send `file-chunk` messages sequentially
-  - Send `file-complete` and reassemble on receiver into a Blob (download link)
-- Stats are updated in real time; RTT is estimated using send/ACK timestamps and plotted as a small sparkline.
+## How Does This Magic Work? 🎭
+
+**The Matchmaking**: Two browsers find each other through our WebSocket signaling server (like a dating app for browsers)
+
+**The Unreliable Channel**: We deliberately choose the most unreliable DataChannel settings - no ordering, no retries
+
+**Our Reliability Layer**: Think of it like registered mail:
+- 📦 Send one package at a time with a tracking number
+- ⏰ Wait for "got it!" confirmation
+- 🔄 If no response in 600ms, try again
+- ✅ Only send the next package after confirmation
+
+**File Transfer Magic**:
+- 📄 First: "Hey, I'm sending you cat.jpg (2MB, 125 pieces)"
+- 🧩 Then: Send each 16KB piece one by one, waiting for each "got it!"
+- 🎉 Finally: "All done!" and the receiver glues the pieces back together
+
+**Live Stats**: Every message, confirmation, and retry is counted and graphed in real-time!
 
 ## Demo Video
 Add your short demo video link here: [Demo Video](https://example.com)
 
-## Notes
-- This demo favors clarity over maximum throughput. Consider a sliding window (Selective Repeat) for higher throughput.
-- Tested locally with Chromium-based and Firefox browsers.
+## Fun Facts & Limitations 🤓
+- **It's Deliberately Slow**: We chose simplicity over speed. A real system might send multiple pieces at once!
+- **Browser Tested**: Works great in Chrome, Firefox, and other modern browsers
+- **Educational**: This is more about understanding the concepts than building a production system
+- **Expandable**: You could easily upgrade this to a sliding window protocol for better performance
 
 ## License
 MIT
