@@ -80,7 +80,7 @@ Open two different browser windows/tabs to the printed client URL (default `http
 **Live Stats**: Every message, confirmation, and retry is counted and graphed in real-time!
 
 ## Demo Video
-Add your short demo video link here: [Demo Video]([https://example.com](https://drive.google.com/file/d/11b_Gff3OQsYgJQSUJ39W7zOYyyoNLisO/view?usp=sharing))
+Add your short demo video link here: [Demo Video]((https://example.com](https://drive.google.com/file/d/11b_Gff3OQsYgJQSUJ39W7zOYyyoNLisO/view?usp=sharing))
 
 ## Fun Facts & Limitations 🤓
 - **It's Deliberately Slow**: We chose simplicity over speed. A real system might send multiple pieces at once!
